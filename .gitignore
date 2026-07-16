@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+threats.db
+.DS_Store
