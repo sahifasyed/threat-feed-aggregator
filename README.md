@@ -5,7 +5,8 @@ relational schema, correlates across sources, and renders a SOC-style
 dashboard — a single self-contained HTML file with no framework
 dependencies.
 
-![Dashboard](output/dashboard_screenshot.png)
+![Dashboard](output/dashboard-1.png)
+![Dashboard](output/dashboard-2.png)
 
 The core idea is corroboration. Any one feed contains noise; an indicator
 independently reported by two unrelated feeds is a materially stronger
