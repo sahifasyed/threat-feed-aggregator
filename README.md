@@ -47,7 +47,7 @@ real, public entries from the KEV catalog.
 Three tables: `feeds`, `indicators` (deduplicated on value + type), and
 `sightings` (one row per feed-observation of an indicator). The
 corroboration query is a two-join GROUP BY with a HAVING clause on
-distinct feed count — see `tfa/analyse.py`, which keeps all the
+distinct feed count, see `tfa/analyse.py`, which keeps all the
 analytical SQL in one readable place.
 
 SQLite is used so the demo needs zero setup; the schema ports to
@@ -65,6 +65,6 @@ Scheduled ingestion (cron), feed reliability weighting, STIX 2.1 export,
 and an ASN/geolocation enrichment pass.
 
 ---
-*Built by Sahifa Syed — BSc Cyber Security & Digital Forensics (First
+*Built by Sahifa Syed - BSc Cyber Security & Digital Forensics (First
 Class), UWE Bristol. Related: my
 [OSINT verification toolkit](https://github.com/sahifasyed/OSINT-Investigation-Toolkit).*
