@@ -1,1 +1,1 @@
-# threat-feed-aggregator
+# Threat-Feed-Aggregator
