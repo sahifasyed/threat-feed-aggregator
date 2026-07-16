@@ -1,0 +1,2 @@
+# Standard library only. pytest needed for tests.
+pytest>=8.0
