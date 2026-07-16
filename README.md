@@ -1,16 +1,16 @@
 # Threat Feed Aggregator
 
 Pulls open threat intelligence feeds, normalises every indicator into a
-relational schema, correlates across sources, and renders a SOC-style
-dashboard — a single self-contained HTML file with no framework
-dependencies.
+relational schema, correlates across sources and renders a SOC-style
+dashboard (a single self-contained HTML file with no framework
+dependencies).
 
 ![Dashboard](output/dashboard-1.png)
 ![Dashboard](output/dashboard-2.png)
 
 The core idea is corroboration. Any one feed contains noise; an indicator
 independently reported by two unrelated feeds is a materially stronger
-signal. Feeds report in incompatible shapes — URLhaus publishes full
+signal. Feeds report in incompatible shapes: URLhaus publishes full
 malware-distribution URLs while Feodo publishes bare C2 IP addresses, so
 naive matching finds zero overlap. The aggregator derives a host-level
 indicator from every URL, which is what makes cross-feed correlation
