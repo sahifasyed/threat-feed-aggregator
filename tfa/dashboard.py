@@ -92,7 +92,14 @@ def render(db, generated_by="tfa"):
     feed_rows = analyse.feed_totals(db)
     corr_rows = analyse.corroborated(db)[:20]
     cves = analyse.recent(db, "cve", 10)
-    families = analyse.top_context_terms(db, "ip") + analyse.top_context_terms(db, "url")
+
+    # An indicator can appear under more than one type (a C2 IP and the
+    # URL hosted on it), so counts are merged by family name rather than
+    # concatenated — otherwise the same family renders as two bars.
+    merged = {}
+    for item in analyse.top_context_terms(db, "ip") + analyse.top_context_terms(db, "url"):
+        merged[item["name"]] = merged.get(item["name"], 0) + item["count"]
+    families = [{"name": k, "count": v} for k, v in merged.items()]
 
     html = f"""<!doctype html><html><head><meta charset="utf-8">
 <title>Threat Feed Dashboard</title><style>{CSS}</style></head><body>

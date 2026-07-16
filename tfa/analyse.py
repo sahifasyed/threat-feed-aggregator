@@ -63,10 +63,17 @@ def top_context_terms(db, ioc_type, limit=8):
         "WHERE i.type = ?", (ioc_type,))
     counts = {}
     for r in rows:
-        # count the value after malware=/threat= style keys
         parts = dict(p.split("=", 1) for p in r["context"].split() if "=" in p)
-        family = parts.get("malware") or parts.get("threat")
-        if family and family.lower() not in ("none", "?"):
+        # Feodo names the family directly. URLhaus doesn't: its `threat`
+        # field is a category ("malware_download"), and the actual family
+        # sits first in the tag list, so prefer tags over threat.
+        family = parts.get("malware")
+        if not family:
+            tags = parts.get("tags", "")
+            family = tags.split(",")[0] if tags else None
+        if not family:
+            family = parts.get("threat")
+        if family and family.lower() not in ("none", "?", ""):
             counts[family] = counts.get(family, 0) + 1
     ranked = sorted(counts.items(), key=lambda kv: -kv[1])[:limit]
     return [{"name": k, "count": v} for k, v in ranked]
